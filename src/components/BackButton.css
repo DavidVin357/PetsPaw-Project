@@ -1,0 +1,18 @@
+.backButton {
+  display: flex;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+.backButton:hover {
+  background-color: #ff868e;
+}
+.backButton:hover svg path {
+  fill: #fff;
+}
+.backButton {
+  background-color: #fbe0dc;
+}

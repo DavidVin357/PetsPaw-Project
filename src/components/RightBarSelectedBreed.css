@@ -1,0 +1,79 @@
+.slider {
+  width: 100%;
+  border-radius: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.slider img {
+  align-self: center;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: #fbe0dc;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 5px;
+}
+.dot:hover {
+  background-color: #ff868e;
+}
+.dots {
+  background-color: #fff;
+  display: flex;
+  border-radius: 20px;
+  padding: 10px 5px;
+}
+.dot:focus {
+  background-color: #ff868e;
+  outline: none;
+}
+.breedText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.breedParams {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  column-gap: 30px;
+  margin: 0 40px;
+}
+.breedParams > p {
+  display: flex;
+  flex-direction: column;
+}
+.breedParams > p > p {
+  margin-bottom: 10px;
+}
+.breedParams .paramName {
+  font-weight: 500;
+  color: #1d1d1d;
+}
+.breedText {
+  display: flex;
+}
+.breedText span {
+  color: #8c8c8c;
+}
+.breedText h1 {
+  font-size: 3.6rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.breedText h2 {
+  font-size: 20;
+  font-weight: 500;
+  color: #8c8c8c;
+  margin-bottom: 30px;
+}
+
+/* .rightSelectedBreedContent .buttonId {
+  font-size: 20;
+  background-color: #ff868e;
+  color: #fff;
+} */

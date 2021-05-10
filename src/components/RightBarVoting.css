@@ -1,0 +1,88 @@
+.rightVotingContent {
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.rightVotingContent .buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.rightVotingContent .image {
+  align-self: center;
+}
+.rightVotingContent .image img {
+  width: 100%;
+}
+#emotions {
+  display: flex;
+}
+
+#emotions:nth-child(n) button {
+  border: 4px solid #fff;
+  padding: 15px;
+}
+
+#like {
+  background-color: #97eab9;
+  border-radius: 20px 0 0 20px;
+  border-right: 0 !important;
+}
+#like:hover {
+  background-color: #e0f9ea;
+}
+#like:hover svg path {
+  fill: #97eab9;
+}
+.fav {
+  background-color: #ff868e;
+  border-radius: 0;
+}
+.favHover:hover {
+  background-color: #ffdbdd;
+}
+
+.favHover:hover svg path {
+  fill: #ff868e;
+}
+#dislike {
+  background-color: #ffd280;
+  border-radius: 0 20px 20px 0px;
+  border-left: 0 !important;
+}
+#dislike:hover {
+  background-color: #fff2d9;
+}
+#dislike:hover svg path {
+  fill: #ffd280;
+}
+.rightVotingContent .logs {
+  width: 100%;
+  align-self: center;
+}
+
+.rightVotingContent .logs .log {
+  display: flex;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #f8f8f7;
+  align-items: center;
+}
+
+.rightVotingContent .logs .log p {
+  color: #8c8c8c;
+  font-size: 1.6rem;
+}
+.rightVotingContent .logs .log .timeText {
+  color: #1d1d1d;
+  background-color: #fff;
+  padding: 1px 10px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+.rightVotingContent .logs .log:last-child {
+  margin-bottom: 0;
+}

@@ -1,0 +1,29 @@
+.rightBreedsContent {
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.rightBreedsContent .buttons {
+  display: grid;
+  grid-template-columns: 40px min-content 2fr 1fr 40px 40px;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.sortButton {
+  background-color: #f8f8f7;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #f8f8f7;
+}
+.sortButton:hover {
+  background-color: #f8f8f7;
+  border-color: #fbe0dc;
+}
+.sortButton:hover svg path {
+  fill: #ff868e;
+}
+.sortButton:focus {
+  background-color: #f8f8f7;
+}

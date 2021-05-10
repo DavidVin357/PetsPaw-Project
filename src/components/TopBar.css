@@ -1,0 +1,50 @@
+.topBar {
+  display: grid;
+  grid-template-columns: 1fr 60px 60px 60px;
+  grid-template-rows: 1fr;
+  height: 60px;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.searchForm {
+  background-color: #fff;
+  border-radius: 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+}
+.topBar button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  width: 60px;
+  height: 60px;
+}
+.topBar button:hover svg path {
+  fill: #ff868e;
+}
+.topBar button:focus {
+  background-color: #ff868e;
+}
+.topBar button:focus svg path {
+  fill: #fff;
+}
+
+.searchField {
+  border: 0;
+  width: calc(100% - 50px);
+  padding: 6px 10px;
+  outline: 0;
+}
+.searchButton {
+  height: 40px !important;
+  width: 40px !important;
+  border-radius: 10px !important;
+  background-color: #fbe0dc;
+  cursor: pointer;
+}
+.searchButton:hover {
+  background-color: #fbe0dc;
+}

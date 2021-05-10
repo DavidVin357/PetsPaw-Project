@@ -1,0 +1,50 @@
+.imageCard {
+  cursor: pointer;
+  position: relative;
+}
+.imageCard img {
+  position: relative;
+  border-radius: 20px;
+}
+.galleryLayer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  text-decoration: none;
+  background-color: transparent;
+  transition: 0.3s;
+}
+.galleryLayerButton {
+  visibility: hidden;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  transition: 0.5s;
+}
+.galleryLayerButton svg {
+  visibility: hidden;
+}
+.galleryLayer:hover {
+  background-color: rgba(255, 134, 142, 0.6);
+}
+
+.galleryLayer:hover .galleryLayerButton svg {
+  visibility: visible;
+}
+
+.galleryLayer:hover .galleryLayerButton {
+  visibility: visible;
+  background-color: #fff;
+}
+.galleryLayer:hover .galleryLayerButton svg path {
+  fill: rgba(255, 134, 142);
+}

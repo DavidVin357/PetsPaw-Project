@@ -1,0 +1,42 @@
+.rightGalleryContent {
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.rightGalleryContent .buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.uploadButton {
+  padding: 10px 30px;
+  background-color: #fbe0dc;
+  margin-left: auto;
+}
+.uploadButton span {
+  margin-left: 10px;
+  font-weight: 400;
+  color: #ff868e;
+}
+.uploadButton:hover {
+  background-color: #ff868e;
+}
+.uploadButton:hover span {
+  color: #fff;
+}
+.uploadButton:hover svg path {
+  fill: #fff;
+}
+.dropDowns {
+  background-color: #f8f8f7;
+  border-radius: 20px;
+  padding: 30px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 40px 40px;
+
+  gap: 30px 20px;
+  margin-bottom: 10px;
+}

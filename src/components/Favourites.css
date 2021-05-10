@@ -1,0 +1,40 @@
+.FavouritesContent {
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.FavouritesContent .buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.FavouritesContent .logs {
+  width: 100%;
+  align-self: center;
+}
+
+.FavouritesContent .logs .log {
+  display: flex;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #f8f8f7;
+  align-items: center;
+}
+
+.FavouritesContent .logs .log p {
+  color: #8c8c8c;
+  font-size: 1.6rem;
+}
+.FavouritesContent .logs .log .timeText {
+  color: #1d1d1d;
+  background-color: #fff;
+  padding: 1px 10px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+.FavouritesContent .logs .log:last-child {
+  margin-bottom: 0;
+}

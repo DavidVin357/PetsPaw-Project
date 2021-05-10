@@ -1,0 +1,39 @@
+.leftContainer {
+  width: 50vw;
+  overflow: hidden;
+  background-color: #f8f8f7;
+  font-size: 2rem;
+}
+h1 {
+  font-size: 4.4rem;
+}
+button {
+  font-size: 1.6rem;
+}
+.logo {
+  margin-top: 30px;
+  margin-bottom: 60px;
+}
+.leftContent {
+  padding: 0 25%;
+}
+/* .leftMainContent {
+  display: flex;
+  flex-direction: column;
+} */
+.leftMainContent > p {
+  flex-grow: 1;
+}
+
+.tasks {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  column-gap: 1em;
+}
+@media only screen and (max-width: 1024px) {
+  .leftContainer {
+    width: 100%;
+  }
+}
