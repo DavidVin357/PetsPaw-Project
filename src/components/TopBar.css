@@ -45,6 +45,9 @@
   background-color: #fbe0dc;
   cursor: pointer;
 }
+.searchButton:focus {
+  background-color: #fbe0dc !important;
+}
 .searchButton:hover {
   background-color: #fbe0dc;
 }

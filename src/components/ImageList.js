@@ -3,38 +3,67 @@ import BreedImageCard from './BreedImageCard'
 import GalleryImageCard from './GalleryImageCard'
 import FavouritesImageCard from './FavouritesImageCard'
 import React from 'react'
+import NoItemFound from './NoItemFound'
 class ImageList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { images: [] }
   }
-  CustomTag = this.props.imageCard
-
+  once = false
   render() {
-    return (
-      <div className='image-list' ref={this.ref}>
-        {this.props.imageCard == 'GalleryImageCard'
-          ? this.props.images.map((image) => (
-              <GalleryImageCard
-                key={image.id}
-                image={image}
-                userId={this.props.userId}
-              />
-            ))
-          : this.props.imageCard == 'FavouritesImageCard'
-          ? this.props.images.map((image) => (
-              <FavouritesImageCard
-                key={image.id}
-                image={image}
-                userId={this.props.userId}
-                removeFav={this.props.removeFav}
-              />
-            ))
-          : this.props.images.map((image) => (
-              <BreedImageCard key={image.id} image={image} />
-            ))}
-      </div>
-    )
+    if (this.props.images.length) {
+      return (
+        <div className='image-list' ref={this.ref}>
+          {this.props.imageCard == 'GalleryImageCard'
+            ? this.props.images.map((image) => {
+                if (image) {
+                  return (
+                    <GalleryImageCard
+                      key={image.id}
+                      image={image}
+                      userId={this.props.userId}
+                    />
+                  )
+                }
+                if (!this.once) {
+                  const once = this.once
+                  this.props.returnContent(false)
+                  this.once = !once
+                }
+                return null
+              })
+            : this.props.imageCard == 'FavouritesImageCard'
+            ? this.props.images.map((image) => {
+                if (image) {
+                  return (
+                    <FavouritesImageCard
+                      key={image.id}
+                      image={image}
+                      userId={this.props.userId}
+                      removeFav={this.props.removeFav}
+                      addLog={this.props.addLog}
+                    />
+                  )
+                }
+                if (!this.once) {
+                  const once = this.once
+                  this.props.returnContent(false)
+                  this.once = !once
+                }
+              })
+            : this.props.images.map((image) => {
+                if (image) {
+                  return <BreedImageCard key={image.id} image={image} />
+                }
+                if (!this.once) {
+                  const once = this.once
+                  this.props.returnContent(false)
+                  this.once = !once
+                }
+              })}
+        </div>
+      )
+    }
+    return <div style={{ display: 'none' }}></div>
   }
 }
 

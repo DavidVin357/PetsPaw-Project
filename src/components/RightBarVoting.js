@@ -9,6 +9,7 @@ import like from '../images/like-color-20.svg'
 import fav from '../images/fav-20.svg'
 import TopBar from './TopBar'
 import BackButton from './BackButton'
+import Loader from './Loader'
 
 class RightBarVoting extends React.Component {
   emotionsRef = React.createRef()
@@ -22,9 +23,11 @@ class RightBarVoting extends React.Component {
     imgId: '',
     userId: this.props.userId,
     logs: [],
+    loading: true,
   }
 
   getImage = async () => {
+    this.setState({ loading: true })
     try {
       const response = await dogapi.get('/images/search')
       const data = response.data[0]
@@ -33,7 +36,7 @@ class RightBarVoting extends React.Component {
     } catch (err) {
       console.log(err)
     }
-    this.setState({ checkedFav: false })
+    this.setState({ checkedFav: false, loading: false })
   }
 
   addLike = async () => {
@@ -105,7 +108,7 @@ class RightBarVoting extends React.Component {
         </div>
 
         <div className='rightVotingContent'>
-          <div class='buttons'>
+          <div className='buttons'>
             <Link to='/' style={{ textDecoration: 'none' }}>
               <BackButton />
             </Link>
@@ -118,7 +121,13 @@ class RightBarVoting extends React.Component {
               marginBottom: `${10 + this.state.height / 2}px`,
             }}
           >
-            <img src={this.state.imgSrc} style={{ borderRadius: '20px' }} />
+            {this.state.loading ? (
+              <div className='loader' style={{ height: '400px' }}>
+                <Loader />
+              </div>
+            ) : (
+              <img src={this.state.imgSrc} style={{ borderRadius: '20px' }} />
+            )}
 
             <div
               id='emotions'
@@ -129,25 +138,10 @@ class RightBarVoting extends React.Component {
                 left: `calc(50% - ${this.state.width / 2}px`,
               }}
             >
-              <button id='like' onClick={this.addLike}>
-                <svg
-                  width='30'
-                  height='30'
-                  viewBox='0 0 30 30'
-                  fill='none'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
-                  <path
-                    fill-rule='evenodd'
-                    clip-rule='evenodd'
-                    d='M0 15C0 6.71573 6.71573 0 15 0C23.2843 0 30 6.71573 30 15C30 23.2843 23.2843 30 15 30C6.71573 30 0 23.2843 0 15ZM15 2C7.8203 2 2 7.8203 2 15C2 22.1797 7.8203 28 15 28C22.1797 28 28 22.1797 28 15C28 7.8203 22.1797 2 15 2ZM10 12H8V10H10V12ZM22 12H20V10H22V12ZM9.2 16.6L9.8 17.4C12.4 20.8667 17.6 20.8667 20.2 17.4L20.8 16.6L22.4 17.8L21.8 18.6C18.4 23.1333 11.6 23.1333 8.2 18.6L7.6 17.8L9.2 16.6Z'
-                    fill='#fff'
-                  />
-                </svg>
-              </button>
               <button
-                className={this.state.checkedFav ? 'fav' : 'fav favHover'}
-                onClick={this.state.checkedFav ? this.removeFav : this.addFav}
+                id='like'
+                onClick={this.addLike}
+                disabled={this.state.loading}
               >
                 <svg
                   width='30'
@@ -157,8 +151,28 @@ class RightBarVoting extends React.Component {
                   xmlns='http://www.w3.org/2000/svg'
                 >
                   <path
-                    fill-rule='evenodd'
-                    clip-rule='evenodd'
+                    fillRule='evenodd'
+                    clipRule='evenodd'
+                    d='M0 15C0 6.71573 6.71573 0 15 0C23.2843 0 30 6.71573 30 15C30 23.2843 23.2843 30 15 30C6.71573 30 0 23.2843 0 15ZM15 2C7.8203 2 2 7.8203 2 15C2 22.1797 7.8203 28 15 28C22.1797 28 28 22.1797 28 15C28 7.8203 22.1797 2 15 2ZM10 12H8V10H10V12ZM22 12H20V10H22V12ZM9.2 16.6L9.8 17.4C12.4 20.8667 17.6 20.8667 20.2 17.4L20.8 16.6L22.4 17.8L21.8 18.6C18.4 23.1333 11.6 23.1333 8.2 18.6L7.6 17.8L9.2 16.6Z'
+                    fill='#fff'
+                  />
+                </svg>
+              </button>
+              <button
+                className={this.state.checkedFav ? 'fav' : 'fav favHover'}
+                onClick={this.state.checkedFav ? this.removeFav : this.addFav}
+                disabled={this.state.loading}
+              >
+                <svg
+                  width='30'
+                  height='30'
+                  viewBox='0 0 30 30'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    fillRule='evenodd'
+                    clipRule='evenodd'
                     d={
                       this.state.checkedFav
                         ? 'M8.07107 2C3.61354 2 0 5.61354 0 10.0711C0 12.2116 0.850339 14.2646 2.36396 15.7782L14.2929 27.7071C14.6834 28.0976 15.3166 28.0976 15.7071 27.7071L27.636 15.7782C29.1497 14.2646 30 12.2116 30 10.0711C30 5.61354 26.3865 2 21.9289 2C19.7884 2 17.7354 2.85034 16.2218 4.36396L15 5.58579L13.7782 4.36396C12.2646 2.85034 10.2116 2 8.07107 2Z'
@@ -168,7 +182,11 @@ class RightBarVoting extends React.Component {
                   />
                 </svg>
               </button>
-              <button id='dislike' onClick={this.addDislike}>
+              <button
+                id='dislike'
+                onClick={this.addDislike}
+                disabled={this.state.loading}
+              >
                 <svg
                   width='30'
                   height='30'
@@ -177,8 +195,8 @@ class RightBarVoting extends React.Component {
                   xmlns='http://www.w3.org/2000/svg'
                 >
                   <path
-                    fill-rule='evenodd'
-                    clip-rule='evenodd'
+                    fillRule='evenodd'
+                    clipRule='evenodd'
                     d='M0 15C0 6.71573 6.71573 0 15 0C23.2843 0 30 6.71573 30 15C30 23.2843 23.2843 30 15 30C6.71573 30 0 23.2843 0 15ZM15 2C7.8203 2 2 7.8203 2 15C2 22.1797 7.8203 28 15 28C22.1797 28 28 22.1797 28 15C28 7.8203 22.1797 2 15 2ZM10 12H8V10H10V12ZM22 12H20V10H22V12ZM7.6 20.2L8.2 19.4C11.6 14.8667 18.4 14.8667 21.8 19.4L22.4 20.2L20.8 21.4L20.2 20.6C17.6 17.1333 12.4 17.1333 9.8 20.6L9.2 21.4L7.6 20.2Z'
                     fill='#fff'
                   />
@@ -190,7 +208,7 @@ class RightBarVoting extends React.Component {
           <div className='logs'>
             {this.state.logs.length != 0
               ? this.state.logs.map((log) => (
-                  <div className='log' key={() => nanoid()}>
+                  <div className='log' key={nanoid()}>
                     <p className='timeText'>{log.time}</p>
                     <p>
                       Image ID:

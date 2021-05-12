@@ -6,8 +6,10 @@ import './Favourites.css'
 import TopBar from './TopBar'
 import ImageList from './ImageList'
 import dogapi from '../dogapi'
+import NoItemFound from './NoItemFound'
+import Loader from './Loader'
 class Search extends React.Component {
-  state = { breeds: [], images: [] }
+  state = { breeds: [], images: [], loading: true, content: true, name: '' }
 
   getBreeds = async () => {
     try {
@@ -19,16 +21,28 @@ class Search extends React.Component {
           name: breed.name,
         }
       })
+      console.log(breedsList)
       this.setState({ breeds: breedsList })
     } catch (err) {}
   }
-  findByName(name) {
-    const breed = this.state.breeds.filter((breed) => breed.name === name)
-    const id = ''
-    if (breed.length == 1) {
-      id = breed[0].id
+  findByName = () => {
+    const name = this.props.match.params.name
+    this.setState({ name })
+    const breed = this.state.breeds.find(
+      (breed) => breed.name.toLowerCase() === name.toLowerCase()
+    )
+    console.log('breed', breed)
+    if (breed) {
+      this.getImagesById(breed.value)
+      this.setState({ content: true })
+    } else {
+      this.setState({ content: false })
     }
+    this.setState({ loading: false })
   }
+  // onSubmit = () => {
+  //   this.findByName(this.props.match.params.name)
+  // }
   getImagesById = async (breedId) => {
     const results = await dogapi.get('/images/search', {
       params: { breed_id: breedId, limit: 20 },
@@ -37,14 +51,30 @@ class Search extends React.Component {
     console.log('getImagesById', images)
     this.setState({ images })
   }
-  componentDidMount() {
-    this.getBreeds()
-    this.findByName(this.props.match.params.id)
+  onSubmit() {
+    this.findByName()
   }
+  returnContent = (content) => {
+    this.setState({ content })
+  }
+
+  async componentDidMount() {
+    await this.getBreeds()
+    await this.findByName()
+    console.log('Mounted!!!')
+  }
+  async componentDidUpdate(prevProps) {
+    if (this.props.match.params.name !== prevProps.match.params.name) {
+      await this.getBreeds()
+      await this.findByName()
+      console.log('Updated!!!')
+    }
+  }
+
   render() {
     return (
       <div className='rightContainer'>
-        <TopBar />
+        <TopBar onSubmit={this.onSubmit} />
         <div className='FavouritesContent'>
           <div className='buttons'>
             <Link to='/' style={{ textDecoration: 'none' }}>
@@ -52,8 +82,23 @@ class Search extends React.Component {
             </Link>
             <button className='textButton'>search</button>
           </div>
-
-          <ImageList images={this.state.images} imageCard='BreedImageCard' />
+          <p style={{ fontSize: '2rem', marginBottom: '5px' }}>
+            Search results for:{' '}
+            <strong>{` ${this.props.match.params.name}`}</strong>
+          </p>
+          {this.state.loading ? (
+            <div style={{ alignSelf: 'center', marginTop: '5px' }}>
+              <Loader />
+            </div>
+          ) : this.state.content ? (
+            <ImageList
+              images={this.state.images}
+              imageCard='BreedImageCard'
+              returnContent={this.returnContent}
+            />
+          ) : (
+            <NoItemFound />
+          )}
         </div>
       </div>
     )

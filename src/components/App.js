@@ -8,8 +8,7 @@ import RightBarBreeds from './RightBarBreeds'
 import RightBarGallery from './RightBarGallery'
 import RightBarSelectedBreed from './RightBarSelectedBreed'
 import Favourites from './Favourites'
-import Likes from './Likes'
-import Dislikes from './Dislikes'
+import Votes from './Votes'
 import Search from './Search'
 const App = () => {
   const userId = nanoid()
@@ -37,10 +36,10 @@ const App = () => {
             <Favourites userId={userId} />
           </Route>
           <Route exact path='/likes'>
-            <Likes userId={userId} />
+            <Votes userId={userId} value={1} />
           </Route>
           <Route exact path='/dislikes'>
-            <Dislikes userId={userId} />
+            <Votes userId={userId} value={0} />
           </Route>
           <Route exact path='/search/:name'>
             <Search />

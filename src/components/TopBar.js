@@ -1,22 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import './TopBar.css'
+import dogapi from '../dogapi'
 class TopBar extends React.Component {
-  state = { term: '' }
+  state = { term: '', breeds: [], images: [] }
   onInputChange = (event) => {
     this.setState({
       term: event.target.value,
     })
   }
-  onFormSubmit = (event) => {
-    event.preventDefault()
 
-    this.props.onSubmit(this.state.term)
-  }
   render() {
     return (
       <div className='topBar'>
-        <form onSubmit={this.onFormSubmit} className='searchForm'>
+        <form className='searchForm'>
           <input
             className='searchField'
             placeholder='Search for breeds by name'
@@ -24,8 +21,11 @@ class TopBar extends React.Component {
             value={this.state.term}
             onChange={this.onInputChange}
           ></input>
-          <Link to={`/search`} style={{ textDecoration: 'none' }}>
-            <button className='searchButton'>
+          <Link
+            to={`/search/${this.state.term}`}
+            style={{ textDecoration: 'none' }}
+          >
+            <button className='searchButton' onClick={this.onSubmit}>
               <svg
                 width='20'
                 height='20'
@@ -42,7 +42,7 @@ class TopBar extends React.Component {
           </Link>
         </form>
         <Link to='/likes' style={{ textDecoration: 'none' }}>
-          <button>
+          <button autoFocus={this.props.focus == 'like'}>
             <svg
               width='30'
               height='30'
@@ -60,7 +60,7 @@ class TopBar extends React.Component {
           </button>
         </Link>
         <Link to='/favourites' style={{ textDecoration: 'none' }}>
-          <button>
+          <button autoFocus={this.props.focus == 'favourite'}>
             <svg
               width='30'
               height='30'
@@ -78,7 +78,7 @@ class TopBar extends React.Component {
           </button>
         </Link>
         <Link to='/dislikes' style={{ textDecoration: 'none' }}>
-          <button>
+          <button autoFocus={this.props.focus == 'dislike'}>
             <svg
               width='30'
               height='30'

@@ -8,12 +8,22 @@ import TopBar from './TopBar'
 import BackButton from './BackButton'
 import Dropdown from './Dropdown'
 import ImageList from './ImageList'
+import NoItemFound from './NoItemFound'
 import { Link } from 'react-router-dom'
+import Loader from './Loader'
 
 class RightBarBreeds extends React.Component {
   limits = [5, 10, 15, 20]
 
-  state = { breeds: [], breedId: '', limit: 5, sortOrder: true, images: [] }
+  state = {
+    breeds: [],
+    breedId: '',
+    limit: 5,
+    sortOrder: true,
+    images: [],
+    content: true,
+    loading: true,
+  }
 
   getBreeds = async () => {
     try {
@@ -46,6 +56,7 @@ class RightBarBreeds extends React.Component {
     const images = results.map((res) => res[0])
     console.log('getAllImages:', images)
     this.setState({ images: images })
+    this.setState({ loading: false })
   }
 
   getImagesById = async (breedId, limit) => {
@@ -55,15 +66,18 @@ class RightBarBreeds extends React.Component {
     const images = results.data
     console.log('getImagesById', images)
     this.setState({ images: images })
+    this.setState({ loading: false })
   }
 
   selectBreeds = (breedId) => {
+    this.setState({ loading: true })
     console.log(`param breedId: ${breedId}, limit:${this.state.limit}`)
     this.setState({ breedId: breedId })
     this.getImagesById(breedId, this.state.limit)
   }
 
   changeLimit = (limit) => {
+    this.setState({ loading: true })
     this.setState({ limit })
     console.log('changeLimit', limit)
     isNaN(parseInt(this.state.breedId))
@@ -72,6 +86,7 @@ class RightBarBreeds extends React.Component {
   }
 
   SortAZ = () => {
+    this.setState({ loading: true })
     const sortOrder = this.state.sortOrder
     if (!sortOrder) {
       const breeds = this.state.breeds
@@ -84,6 +99,7 @@ class RightBarBreeds extends React.Component {
     }
   }
   SortZA = () => {
+    this.setState({ loading: true })
     const sortOrder = this.state.sortOrder
     if (sortOrder) {
       const breeds = this.state.breeds
@@ -95,7 +111,9 @@ class RightBarBreeds extends React.Component {
       this.getAllImages(this.state.limit)
     }
   }
-
+  returnContent = (content) => {
+    this.setState({ content })
+  }
   async componentDidMount() {
     await this.getBreeds()
     await this.getAllImages(this.state.limit)
@@ -160,7 +178,18 @@ class RightBarBreeds extends React.Component {
               </svg>
             </button>
           </div>
-          <ImageList images={this.state.images} imageCard='BreedImageCard' />
+          {this.state.loading ? (
+            <div style={{ alignSelf: 'center', marginTop: '5px' }}>
+              <Loader />
+            </div>
+          ) : (
+            <ImageList
+              images={this.state.images}
+              imageCard='BreedImageCard'
+              returnContent={this.returnContent}
+            />
+          )}
+          {this.state.content ? null : <NoItemFound />}
         </div>
       </div>
     )

@@ -2,6 +2,7 @@ import React from 'react'
 import { nanoid } from 'nanoid'
 import dogapi from '../dogapi'
 import uniqueRandomArray from 'unique-random-array'
+import TestRenderer from 'react-test-renderer'
 import './RightBar.css'
 import './RightBarGallery.css'
 import ImageList from './ImageList'
@@ -9,6 +10,8 @@ import BackButton from './BackButton'
 import TopBar from './TopBar'
 import Dropdown from './Dropdown'
 import { Link } from 'react-router-dom'
+import NoItemFound from './NoItemFound'
+import Loader from './Loader'
 
 class RightBarGallery extends React.Component {
   state = {
@@ -18,6 +21,8 @@ class RightBarGallery extends React.Component {
     type: 'gif,jpg,png',
     order: 'RANDOM',
     images: [],
+    content: true,
+    loading: true,
   }
   orders = ['Random', 'Asc', 'Desc']
   types = [
@@ -58,12 +63,17 @@ class RightBarGallery extends React.Component {
             order: this.state.order,
           },
         })
+
         return response.data
       })
     )
+    console.log('results:', results)
     const images = results.map((res) => res[0])
-    console.log('getAllImages:', images)
+    if (images.length == 0) {
+      this.setState({ content: false })
+    }
     this.setState({ images: images })
+    this.setState({ loading: false })
   }
 
   getImagesById = async () => {
@@ -76,8 +86,12 @@ class RightBarGallery extends React.Component {
       },
     })
     const images = results.data
+    if (images.length == 0) {
+      this.setState({ content: false })
+    }
     console.log('getImagesById', images)
     this.setState({ images: images })
+    this.setState({ loading: false })
   }
 
   selectBreeds = (breedId) => {
@@ -101,9 +115,13 @@ class RightBarGallery extends React.Component {
   }
 
   onUpdate = () => {
+    this.setState({ content: 'content', loading: true })
     isNaN(parseInt(this.state.breedId))
       ? this.getAllImages(this.state.limit)
       : this.getImagesById(this.state.breedId, this.state.limit)
+  }
+  returnContent = (content) => {
+    this.setState({ content })
   }
 
   async componentDidMount() {
@@ -212,11 +230,20 @@ class RightBarGallery extends React.Component {
               </button>
             </div>
           </div>
-          <ImageList
-            images={this.state.images}
-            imageCard='GalleryImageCard'
-            userId={this.props.userId}
-          />
+          {this.state.loading ? (
+            <div style={{ alignSelf: 'center' }}>
+              <Loader />
+            </div>
+          ) : (
+            <ImageList
+              images={this.state.images}
+              imageCard='GalleryImageCard'
+              userId={this.props.userId}
+              returnContent={this.returnContent}
+            />
+          )}
+
+          {this.state.content ? null : <NoItemFound />}
         </div>
       </div>
     )

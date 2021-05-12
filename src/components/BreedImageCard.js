@@ -16,24 +16,31 @@ class BreedImageCard extends React.Component {
     const spans = Math.ceil(height / 30)
     this.setState({ height, spans })
   }
+  returnCard = () => {}
 
   render() {
     const image = this.props.image
-    return (
-      <div
-        className='imageCard'
-        style={{
-          gridRowEnd: `span ${this.state.spans}`,
-        }}
-      >
-        <img ref={this.imageRef} alt={image.breeds[0].name} src={image.url} />
-        <Link to={`/breeds/${image.breeds[0].id}`} className='breedlayerLink'>
-          <div className='breedLayer' style={{ height: this.state.height }}>
-            <button className='breedLayerButton'>{image.breeds[0].name}</button>
-          </div>
-        </Link>
-      </div>
-    )
+
+    if (image) {
+      return (
+        <div
+          className='imageCard'
+          style={{
+            gridRowEnd: `span ${this.state.spans}`,
+          }}
+        >
+          <img ref={this.imageRef} alt={image.breeds[0].name} src={image.url} />
+          <Link to={`/breeds/${image.breeds[0].id}`} className='breedlayerLink'>
+            <div className='breedLayer' style={{ height: this.state.height }}>
+              <button className='breedLayerButton'>
+                {image.breeds[0].name}
+              </button>
+            </div>
+          </Link>
+        </div>
+      )
+    }
+    return <div style={{ display: 'none' }}></div>
   }
 }
 

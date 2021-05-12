@@ -7,27 +7,27 @@ import './Favourites.css'
 import TopBar from './TopBar'
 import ImageList from './ImageList'
 import dogapi from '../dogapi'
+import NoItemFound from './NoItemFound'
+import Loader from './Loader'
 class Favourites extends React.Component {
-  state = { favIds: [], imageIds: [], images: [], logs: [] }
+  state = { images: [], logs: [], loading: true, content: true }
   getAllFavs = async () => {
     const response = await dogapi.get('/favourites', {
       params: { sub_id: this.props.userId },
     })
-    const results = response.data
-    const favIds = results.map((result) => result.id)
-    const images = results.map((result) => result.image.url)
-    this.setState({ favIds, images })
+    const images = response.data
+    if (images.length == 0) {
+      this.setState({ content: false })
+    }
+    this.setState({ images })
+    this.setState({ loading: false })
   }
-  removeFav = (id) => {
-    const favIds = [...this.state.favIds]
+  removeFav = async (favId) => {
     const images = [...this.state.images]
-    const index = favIds.indexOf(id)
-    favIds.filter((favId) => favId != id)
-    images.splice(index, 1)
-    this.setState({ favIds, images })
-    this.addLog()
+    images.filter((image) => image.id != favId)
+    this.setState({ images })
   }
-  addLog = (imgId, text, icon) => {
+  addLog = (imgId) => {
     const date = new Date()
     const hours = date.getHours()
     const minutes = date.getMinutes()
@@ -35,9 +35,11 @@ class Favourites extends React.Component {
     logs.unshift({
       time: `${hours}:${minutes}`,
       imgId,
-      text,
-      icon,
     })
+    this.setState({ logs })
+  }
+  returnContent = (content) => {
+    this.setState({ content })
   }
   componentDidMount() {
     this.getAllFavs()
@@ -45,7 +47,7 @@ class Favourites extends React.Component {
   render() {
     return (
       <div className='rightContainer'>
-        <TopBar />
+        <TopBar focus='favourite' />
         <div className='FavouritesContent'>
           <div className='buttons'>
             <Link to='/' style={{ textDecoration: 'none' }}>
@@ -53,31 +55,39 @@ class Favourites extends React.Component {
             </Link>
             <button className='textButton'>Favourites</button>
           </div>
-
-          <ImageList
-            images={this.state.images}
-            imageCard='FavouritesImageCard'
-            userId={this.props.userId}
-            removeFav={this.removeFav}
-          />
-          <div className='logs'>
-            {this.state.logs.length != 0
-              ? this.state.logs.map((log) => (
-                  <div className='log' key={() => nanoid()}>
-                    <p className='timeText'>{log.time}</p>
-                    <p>
-                      Image ID:
-                      <strong style={{ color: '#1D1D1D' }}>
-                        {` ` + log.imgId}
-                      </strong>
-                      {` was `}
-                      {log.text}
-                    </p>
-                    <img src={log.icon} style={{ marginLeft: 'auto' }}></img>
-                  </div>
-                ))
-              : ''}
-          </div>
+          {this.state.loading ? (
+            <div style={{ alignSelf: 'center', marginTop: '5px' }}>
+              <Loader />
+            </div>
+          ) : (
+            <div>
+              <ImageList
+                images={this.state.images}
+                imageCard='FavouritesImageCard'
+                userId={this.props.userId}
+                removeFav={this.removeFav}
+                addLog={this.addLog}
+                returnContent={this.returnContent}
+              />
+              <div className='logs'>
+                {this.state.logs.length != 0
+                  ? this.state.logs.map((log) => (
+                      <div className='log' key={() => nanoid()}>
+                        <p className='timeText'>{log.time}</p>
+                        <p>
+                          Image ID:
+                          <strong style={{ color: '#1D1D1D' }}>
+                            {` ` + log.imgId}
+                          </strong>
+                          {` was removed from Favourites`}
+                        </p>
+                      </div>
+                    ))
+                  : ''}
+              </div>
+            </div>
+          )}
+          {this.state.content ? null : <NoItemFound />}
         </div>
       </div>
     )
