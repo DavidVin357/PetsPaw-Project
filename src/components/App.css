@@ -17,6 +17,7 @@ button {
   border: none;
   font-weight: 500;
   border-radius: 10px;
+  letter-spacing: 2px;
 }
 button:hover {
   background-color: #fbe0dc;
@@ -53,14 +54,19 @@ button:hover svg path {
   fill: #fff;
 }
 
-input[type='text']::placeholder {
+::placeholder {
   font-size: 2rem;
   color: #8c8c8c;
 }
 input[type='text'] {
   font-size: 2rem;
 }
-
+input:focus::-webkit-input-placeholder {
+  color: #1d1d1d;
+}
+input::-moz-placeholder {
+  color: #1d1d1d;
+}
 @media only screen and (max-width: 1024px) {
   .app {
     flex-direction: column;

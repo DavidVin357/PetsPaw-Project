@@ -7,6 +7,10 @@ select {
   border: 0px;
   padding: 0 32px 0 10px;
   font-size: 1.6rem;
+  border: 2px solid transparent;
+}
+select:hover {
+  border: 2px solid #fbe0dc;
 }
 .dropdown {
   position: relative;

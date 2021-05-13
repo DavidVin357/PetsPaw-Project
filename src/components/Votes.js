@@ -25,7 +25,6 @@ class Votes extends React.Component {
       )
 
       const images = results.map((result) => result.data)
-      console.log('dislike images', images)
       this.setState({ images })
       this.setState({ loading: false })
     } else {
@@ -42,7 +41,6 @@ class Votes extends React.Component {
   }
   async componentDidUpdate(prevProps) {
     if (prevProps.value !== this.props.value) {
-      console.log('Updated props!')
       this.setState({ name: this.props.value ? 'Likes' : 'Dislikes' })
       await this.getVotes()
     }

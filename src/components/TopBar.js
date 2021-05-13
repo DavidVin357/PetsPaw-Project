@@ -1,25 +1,39 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './TopBar.css'
-import dogapi from '../dogapi'
 class TopBar extends React.Component {
-  state = { term: '', breeds: [], images: [] }
+  state = { formFocus: false, term: '', breeds: [], images: [] }
   onInputChange = (event) => {
     this.setState({
       term: event.target.value,
     })
   }
+  formFocus = () => {
+    this.setState({ formFocus: true })
+  }
+  formBlur = () => {
+    this.setState({ formFocus: false })
+  }
 
   render() {
     return (
       <div className='topBar'>
-        <form className='searchForm'>
+        <form
+          className='searchForm'
+          style={{
+            border: this.state.formFocus
+              ? '2px solid #FF868E'
+              : '2px solid transparent',
+          }}
+        >
           <input
             className='searchField'
             placeholder='Search for breeds by name'
             type='text'
             value={this.state.term}
             onChange={this.onInputChange}
+            onFocus={this.formFocus}
+            onBlur={this.formBlur}
           ></input>
           <Link
             to={`/search/${this.state.term}`}

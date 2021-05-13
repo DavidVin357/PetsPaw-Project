@@ -21,7 +21,6 @@ class Search extends React.Component {
           name: breed.name,
         }
       })
-      console.log(breedsList)
       this.setState({ breeds: breedsList })
     } catch (err) {}
   }
@@ -31,7 +30,6 @@ class Search extends React.Component {
     const breed = this.state.breeds.find(
       (breed) => breed.name.toLowerCase() === name.toLowerCase()
     )
-    console.log('breed', breed)
     if (breed) {
       this.getImagesById(breed.value)
       this.setState({ content: true })
@@ -40,15 +38,11 @@ class Search extends React.Component {
     }
     this.setState({ loading: false })
   }
-  // onSubmit = () => {
-  //   this.findByName(this.props.match.params.name)
-  // }
   getImagesById = async (breedId) => {
     const results = await dogapi.get('/images/search', {
       params: { breed_id: breedId, limit: 20 },
     })
     const images = results.data
-    console.log('getImagesById', images)
     this.setState({ images })
   }
   onSubmit() {
@@ -61,13 +55,11 @@ class Search extends React.Component {
   async componentDidMount() {
     await this.getBreeds()
     await this.findByName()
-    console.log('Mounted!!!')
   }
   async componentDidUpdate(prevProps) {
     if (this.props.match.params.name !== prevProps.match.params.name) {
       await this.getBreeds()
       await this.findByName()
-      console.log('Updated!!!')
     }
   }
 

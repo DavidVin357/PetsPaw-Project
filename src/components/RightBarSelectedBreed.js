@@ -20,7 +20,6 @@ class RightBarSelectedBreed extends React.Component {
       params: { breed_id: breedId, limit: 5 },
     })
     const images = results.data
-    console.log('getImagesById', images)
     this.setState({ images: images })
     this.setState({ currentImage: images[0].url })
     this.setState({ breedData: images[0].breeds[0] })
@@ -36,7 +35,6 @@ class RightBarSelectedBreed extends React.Component {
     this.getImagesById(this.props.match.params.id)
     const height = this.dotsRef.current.clientHeight
     this.setState({ height })
-    console.log(this.state.breedData)
   }
   render() {
     return (

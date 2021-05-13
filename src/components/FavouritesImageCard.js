@@ -17,7 +17,6 @@ class FavouritesImageCard extends React.Component {
     }
     const checkedFav = this.state.checkedFav
     this.setState({ checkedFav: !checkedFav })
-    console.log('Favourite', checkedFav)
     this.props.removeFav(this.props.image.id)
     this.props.addLog(this.props.image.image.id)
   }

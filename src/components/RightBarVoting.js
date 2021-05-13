@@ -89,7 +89,6 @@ class RightBarVoting extends React.Component {
     })
 
     this.setState({ logs })
-    console.log(this.state.logs[0])
   }
   componentDidMount() {
     this.getImage()
@@ -122,7 +121,7 @@ class RightBarVoting extends React.Component {
             }}
           >
             {this.state.loading ? (
-              <div className='loader' style={{ height: '400px' }}>
+              <div className='loader' style={{ height: '600px' }}>
                 <Loader />
               </div>
             ) : (

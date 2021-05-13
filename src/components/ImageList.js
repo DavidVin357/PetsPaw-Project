@@ -3,7 +3,6 @@ import BreedImageCard from './BreedImageCard'
 import GalleryImageCard from './GalleryImageCard'
 import FavouritesImageCard from './FavouritesImageCard'
 import React from 'react'
-import NoItemFound from './NoItemFound'
 class ImageList extends React.Component {
   constructor(props) {
     super(props)

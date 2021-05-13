@@ -7,7 +7,6 @@ class Dropdown extends React.Component {
   }
   onInputChange = (event) => {
     this.setState({ selectedValue: event.target.value })
-    console.log('Selected! Value:', event.target.value)
     this.props.onChange(event.target.value)
   }
   // backgroundColor, textColor label(?), firstText(?), option([{id, value, name}]), onChange,

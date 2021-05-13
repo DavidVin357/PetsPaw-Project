@@ -54,7 +54,6 @@ class RightBarBreeds extends React.Component {
       })
     )
     const images = results.map((res) => res[0])
-    console.log('getAllImages:', images)
     this.setState({ images: images })
     this.setState({ loading: false })
   }
@@ -64,14 +63,12 @@ class RightBarBreeds extends React.Component {
       params: { breed_id: breedId, limit },
     })
     const images = results.data
-    console.log('getImagesById', images)
     this.setState({ images: images })
     this.setState({ loading: false })
   }
 
   selectBreeds = (breedId) => {
     this.setState({ loading: true })
-    console.log(`param breedId: ${breedId}, limit:${this.state.limit}`)
     this.setState({ breedId: breedId })
     this.getImagesById(breedId, this.state.limit)
   }
@@ -79,7 +76,6 @@ class RightBarBreeds extends React.Component {
   changeLimit = (limit) => {
     this.setState({ loading: true })
     this.setState({ limit })
-    console.log('changeLimit', limit)
     isNaN(parseInt(this.state.breedId))
       ? this.getAllImages(limit)
       : this.getImagesById(this.state.breedId, limit)

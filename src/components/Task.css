@@ -12,7 +12,7 @@ div {
 }
 .taskImage {
   border-radius: 20px;
-  padding: 5px;
+  padding: 5px 10px;
   display: flex;
   align-items: center;
 }
@@ -29,4 +29,8 @@ div {
   margin-top: 15px;
   padding: 10px 0;
   border-radius: 10px;
+}
+.taskButton:focus {
+  background-color: #ff868e;
+  color: #fff;
 }
