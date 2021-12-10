@@ -11,7 +11,6 @@ import RightBarSelectedBreed from './RightBarSelectedBreed'
 import Favourites from './Favourites'
 import Votes from './Votes'
 import Search from './Search'
-import Uploader from './Uploader'
 
 class App extends React.Component {
   state = { bgColor: '' }
@@ -65,13 +64,6 @@ class App extends React.Component {
             </Route>
             <Route exact path='/search/:name'>
               <Search />
-            </Route>
-            <Route exact path='/upload'>
-              <Uploader
-                userId={this.userId}
-                darkenScreen={this.darkenScreen}
-                lightenScreen={this.lightenScreen}
-              />
             </Route>
           </Switch>
         </div>

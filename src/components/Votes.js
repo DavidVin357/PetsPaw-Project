@@ -10,39 +10,42 @@ import Loader from './Loader'
 class Votes extends React.Component {
   state = { name: '', images: [], content: true, loading: true }
   getVotes = async () => {
+    this.setState({ loading: true })
     const response = await dogapi.get('/votes', {
       params: {
         sub_id: this.props.userId,
       },
     })
-    const votes = response.data
-    if (votes.length != 0) {
-      const dislikes = votes.filter((vote) => vote.value == this.props.value)
-      const results = await Promise.all(
-        dislikes.map(
-          async (dislike) => await dogapi.get(`/images/${dislike.image_id}`)
-        )
-      )
-
-      const images = results.map((result) => result.data)
-      this.setState({ images })
-      this.setState({ loading: false })
-    } else {
-      this.setState({ loading: false })
+    const images = response.data
+    if (images.length == 0) {
       this.setState({ content: false })
     }
+    const votes = images.filter((vote) => vote.value === this.props.value)
+    let final_images = []
+    for (const vote of votes) {
+      try {
+        const response = await dogapi.get(`/images/${vote.image_id}`)
+        const image = response.data
+        final_images.push(image)
+      } catch {
+        console.log('Image not Fetched')
+        continue
+      }
+    }
+    this.setState({ images: final_images })
+    this.setState({ loading: false })
   }
   returnContent = (content) => {
     this.setState({ content })
   }
-  async componentDidMount() {
+  componentDidMount() {
     this.setState({ name: this.props.value ? 'Likes' : 'Dislikes' })
-    await this.getVotes()
+    this.getVotes()
   }
-  async componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {
     if (prevProps.value !== this.props.value) {
       this.setState({ name: this.props.value ? 'Likes' : 'Dislikes' })
-      await this.getVotes()
+      this.getVotes()
     }
   }
   render() {

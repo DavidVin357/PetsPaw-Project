@@ -16,10 +16,15 @@ const LeftBar = () => {
           </div>
         </Link>
         <div className='leftMainContent'>
-          <h1 style={{ color: '#1D1D1D', marginBottom: '10px' }}>Hi intern!</h1>
-          <p style={{ color: '#8C8C8C' }}>Welcome to MSI 2021 Front-end test</p>
+          <h1 style={{ color: '#1D1D1D', marginBottom: '10px' }}>
+            Hi Dog Lover!
+          </h1>
+          <p style={{ color: '#8C8C8C' }}>
+            Welcome to PetsPaw for exploring new dogs!
+          </p>
           <p style={{ fontWeight: '500', marginTop: '50px' }}>
-            Lets start using The Dogs API
+            Lets start using{' '}
+            <a href='https://www.thedogapi.com/'>The Dogs API </a>
           </p>
           <div className='tasks'>
             <Task name='voting' backgroundColor='#B4B7FF' path='/voting'>
