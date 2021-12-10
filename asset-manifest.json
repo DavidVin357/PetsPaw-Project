@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/PetsPaw-Project/static/css/main.45e5dc78.chunk.css",
-    "main.js": "/PetsPaw-Project/static/js/main.060032e0.chunk.js",
-    "main.js.map": "/PetsPaw-Project/static/js/main.060032e0.chunk.js.map",
+    "main.js": "/PetsPaw-Project/static/js/main.f651d41b.chunk.js",
+    "main.js.map": "/PetsPaw-Project/static/js/main.f651d41b.chunk.js.map",
     "runtime-main.js": "/PetsPaw-Project/static/js/runtime-main.e2f1d821.js",
     "runtime-main.js.map": "/PetsPaw-Project/static/js/runtime-main.e2f1d821.js.map",
     "static/js/2.73859ab9.chunk.js": "/PetsPaw-Project/static/js/2.73859ab9.chunk.js",
@@ -24,6 +24,6 @@
     "static/js/runtime-main.e2f1d821.js",
     "static/js/2.73859ab9.chunk.js",
     "static/css/main.45e5dc78.chunk.css",
-    "static/js/main.060032e0.chunk.js"
+    "static/js/main.f651d41b.chunk.js"
   ]
 }
