@@ -108,7 +108,7 @@ class RightBarVoting extends React.Component {
 
         <div className='rightVotingContent'>
           <div className='buttons'>
-            <Link to='/' style={{ textDecoration: 'none' }}>
+            <Link to='/PetsPaw-Project' style={{ textDecoration: 'none' }}>
               <BackButton />
             </Link>
             <button className='textButton'>voting</button>

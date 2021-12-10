@@ -54,7 +54,7 @@ class Votes extends React.Component {
         <TopBar focus={this.props.value ? 'like' : 'dislike'} />
         <div className='FavouritesContent'>
           <div className='buttons'>
-            <Link to='/' style={{ textDecoration: 'none' }}>
+            <Link to='/PetsPaw-Project' style={{ textDecoration: 'none' }}>
               <BackButton />
             </Link>
             <button className='textButton'>{this.state.name}</button>

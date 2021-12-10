@@ -128,7 +128,7 @@ class RightBarGallery extends React.Component {
         <TopBar />
         <div className='rightGalleryContent'>
           <div className='buttons'>
-            <Link to='/' style={{ textDecoration: 'none' }}>
+            <Link to='/PetsPaw-Project' style={{ textDecoration: 'none' }}>
               <BackButton />
             </Link>
             <button className='textButton'>gallery</button>

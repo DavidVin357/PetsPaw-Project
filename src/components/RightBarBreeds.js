@@ -120,7 +120,7 @@ class RightBarBreeds extends React.Component {
         <TopBar />
         <div className='rightBreedsContent'>
           <div className='buttons'>
-            <Link to='/' style={{ textDecoration: 'none' }}>
+            <Link to='/PetsPaw-Project' style={{ textDecoration: 'none' }}>
               <BackButton />
             </Link>
             <button className='textButton'>breeds</button>
