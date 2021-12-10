@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.45e5dc78.chunk.css",
+    "main.js": "/static/js/main.060032e0.chunk.js",
+    "main.js.map": "/static/js/main.060032e0.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.25d5db5a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.25d5db5a.js.map",
+    "static/js/2.73859ab9.chunk.js": "/static/js/2.73859ab9.chunk.js",
+    "static/js/2.73859ab9.chunk.js.map": "/static/js/2.73859ab9.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.45e5dc78.chunk.css.map": "/static/css/main.45e5dc78.chunk.css.map",
+    "static/js/2.73859ab9.chunk.js.LICENSE.txt": "/static/js/2.73859ab9.chunk.js.LICENSE.txt",
+    "static/media/dislike-color-20.c0b569af.svg": "/static/media/dislike-color-20.c0b569af.svg",
+    "static/media/dropdown-12.7bba6ca3.svg": "/static/media/dropdown-12.7bba6ca3.svg",
+    "static/media/fav-20.f30ae98c.svg": "/static/media/fav-20.f30ae98c.svg",
+    "static/media/girl-and-pet.bb7b0e36.svg": "/static/media/girl-and-pet.bb7b0e36.svg",
+    "static/media/images-search.1eeb1973.svg": "/static/media/images-search.1eeb1973.svg",
+    "static/media/like-color-20.46dd82e4.svg": "/static/media/like-color-20.46dd82e4.svg",
+    "static/media/logo.f2bee3c2.svg": "/static/media/logo.f2bee3c2.svg",
+    "static/media/pet-breeds.34cb1cd7.svg": "/static/media/pet-breeds.34cb1cd7.svg",
+    "static/media/vote-table.404997a2.svg": "/static/media/vote-table.404997a2.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.25d5db5a.js",
+    "static/js/2.73859ab9.chunk.js",
+    "static/css/main.45e5dc78.chunk.css",
+    "static/js/main.060032e0.chunk.js"
+  ]
+}
