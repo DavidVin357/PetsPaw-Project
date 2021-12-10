@@ -10,7 +10,7 @@ const LeftBar = () => {
   return (
     <div className='leftContainer'>
       <div className='leftContent'>
-        <Link to='/' style={{ textDecoration: 'none' }}>
+        <Link to='/PetsPaw-Project' style={{ textDecoration: 'none' }}>
           <div className='logo'>
             <img alt='logo' src={logo} />
           </div>
