@@ -38,7 +38,7 @@ class App extends React.Component {
           <LeftBar />
 
           <Switch>
-            <Route exact path='/'>
+            <Route exact path='/PetsPaw-Project'>
               <RightBarHome />
             </Route>
             <Route exact path='/voting'>
